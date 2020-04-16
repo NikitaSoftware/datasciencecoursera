@@ -1,8 +1,0 @@
----
-title: "This is my Markdown"
-author: "NikitaSoftware"
-date: "13 04 2020"
-output: html_document
----
-
-https://github.com/NikitaSoftware/datasciencecoursera
