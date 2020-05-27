@@ -1,0 +1,27 @@
+download.file(https://d396qusza40orc.cloudfront.net/getdata%2Fdata%2Fss06hid.csv','./week1/Q1.csv','curl')
+f = read.csv('./Q1.csv')
+sum(f$VAL==24 & !is.na(f$VAL))
+print(date())
+
+library(xlsx)
+download.file('https://d396qusza40orc.cloudfront.net/getdata%2Fdata%2FDATA.gov_NGAP.xlsx','./Q3.xlsx','curl')
+dat = read.xlsx('./Q3.xlsx',1,rowIndex = 18:23,colIndex = 7:15,header = TRUE)
+sum(dat$Zip*dat$Ext,na.rm=T)
+print(date())
+
+library(XML)
+doc <-  xmlTreeParse("http://d396qusza40orc.cloudfront.net/getdata%2Fdata%2Frestaurants.xml",useInternal = TRUE)
+rootnode <- xmlRoot(doc)
+sum(xpathSApply(rootnode,"//zipcode",xmlValue) == 21231)
+print(date())
+
+library(data.table)
+download.file('https://d396qusza40orc.cloudfront.net/getdata%2Fdata%2Fss06pid.csv','./Q5.csv','curl')
+print(date())
+
+DT = fread('./Q5.csv')
+system.time(tapply(DT$pwgtp15,DT$SEX,mean))
+system.time(sapply(split(DT$pwgtp15,DT$SEX),mean))
+system.time(mean(DT$pwgtp15,by=DT$SEX))
+system.time(DT[,mean(pwgtp15),by=SEX])
+system.time(mean(DT[DT$SEX==1,]$pwgtp15))
